@@ -96,4 +96,4 @@ const deleteTask = async (req,res)=>{
         })
     }
 }
-module.exports = {createTask,getTask,updateTask,deleteTask}
+module.exports = {createTask,getTask,getOneTask,updateTask,deleteTask}
