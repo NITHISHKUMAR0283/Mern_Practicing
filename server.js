@@ -4,10 +4,11 @@ const TaskRoute = require("./src/routes/taskRoute")
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+app.use(express.json());
 app.get("/",(req,res)=>{
     console.log("sending res");
     res.send("Hello world");});
-app.get("/Task",TaskRoute);
+app.use("/api/task",TaskRoute);
 app.listen(PORT,()=>{
     console.log(`server is running in port ${PORT}`);
 })
