@@ -74,4 +74,25 @@ const updateProject = async (req,res,next)=>{
         )
     }
 }
-module.exports= {createProject,getProject,getOneProject,updateProject};
+
+const deleteProject = async (req,res,next)=>{
+    try{
+        const deleted = await Project.findOneAndDelete({owner:req.user._id,_id:req.params.id});
+        if(!deleted){
+            return res.status(404).json({
+                success:false,
+                message:"cant able to delete the project"
+            })}
+        res.status(200).json({
+            success:true,
+            message:"Deleted Successfully"
+        })
+        
+    }catch(err){
+        res.status(500).json({
+            success:false,
+            error:err
+        })
+    }
+}
+module.exports= {createProject,getProject,getOneProject,updateProject,deleteProject};
