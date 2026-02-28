@@ -1,5 +1,6 @@
 const express = require("express");
 const isauthorized = require("../middleware/authorization.js")
+const Task = require("../models/Task")
 const isauthenticated = require("../middleware/authMiddleWare.js")
 const router = express.Router()
 const {createTask,getTask,getOneTask,updateTask,deleteTask}=require("../controllers/taskcontroller")

@@ -17,3 +17,4 @@ const isauthorized = (Model)=>{
     }
     
 }
+module.exports = isauthorized
