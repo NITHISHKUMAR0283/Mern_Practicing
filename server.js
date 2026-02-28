@@ -11,6 +11,14 @@ app.get("/",(req,res)=>{
     console.log("sending res");
     res.send("Hello world");});
 app.use("/api/task",TaskRoute);
+
+app.use((err,req,res,next)=>{
+    console.log("error function called");
+    res.status(500).json({
+        
+        message:err.message
+    })
+});
 app.listen(PORT,()=>{
     console.log(`server is running in port ${PORT}`);
 })
