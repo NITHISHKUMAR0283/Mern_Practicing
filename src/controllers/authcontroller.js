@@ -22,6 +22,16 @@ const registerUser = async (req,res)=>{
         })
     }
 }
+const generaterefresh = async (user)=>{
+    const refresh =jwt.sign({user:user._id},process.env.JWT_REFRESH,{expiresIn:"7d"});
+    return refresh;
+}
+
+const generateaccess = async (user)=>{
+    const access =jwt.sign({user:user._id},process.env.JWT_ACCESS,{expiresIn:"7d"});
+    return access;
+}
+
 const loginUser = async (req,res)=>{
     try{
     const user = await User.findOne({email:req.body.email}).select("+password");
@@ -37,16 +47,21 @@ const loginUser = async (req,res)=>{
             message:"invalid credentials"
         })
     }
-    const Token =jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1d"});
+    const refreshtoken = await generaterefresh(user);
+    const accesstoken = await generateaccess(user);
 
-    res.status(200).json({
-        success:true,
-        token:Token
-    });
+    user.refreshtoken = refreshtoken
+    await user.save()
+    res.cookie("refreshtoken",refreshtoken,{
+        httpOnly:true,
+        secure : process.env.NODE_ENV==="production",
+        sameSite:"Strict",
+        path:"/auth/refresh"
+    }).json({access:accesstoken})
 }
     catch(err){
         res.status(500).json({
-            succes:false,
+            success:false,
             error:err
 
         })
@@ -55,4 +70,38 @@ const loginUser = async (req,res)=>{
 
 }
 
-module.exports ={registerUser,loginUser}
+const logoutUser = async (req,res) =>{
+
+    try{
+    const refreshtoken = req.cookies.refreshtoken
+        if (!refreshtoken){
+        return res.status(401).json({
+            success:false,
+            message:"Token not found"
+        })
+    }
+    const payload = jwt.verify(refreshtoken,process.env.JWT_REFRESH);
+    const userid = payload.user
+    const user = await User.findById(userid);
+    if (user == null){
+        return res.status(400).json({
+            success:false,
+            message:"User not found"
+        })
+    }
+    user.refreshtoken = null;
+    await user.save();
+    res.clearCookie("refreshtoken",{path:"/auth/refresh"});
+    res.sendStatus(200);}
+    catch(err){
+        res.status(500).json({
+            success:false,
+            error:err
+
+        })
+    }
+}
+
+    
+
+module.exports ={registerUser,loginUser,logoutUser}
