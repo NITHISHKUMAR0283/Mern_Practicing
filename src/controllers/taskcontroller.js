@@ -17,7 +17,7 @@ const createTask = async (req,res)=>{
 }
 const getTask = async (req,res)=>{
     try{
-        const tasks = await Task.find();
+        const tasks = await Task.find({createdBy:req.user._id});
         return res.status(200).json({
             success:true,
             task : tasks
@@ -33,7 +33,7 @@ const getTask = async (req,res)=>{
 }
 const getOneTask = async(req,res)=>{
     try{
-        const task = await Task.findById(req.params.id);
+        const task = await Task.findOne({_id:req.params.id,createdBy:req.user._id});
         if (task ==null){
             return res.status(404).json({
                 success:false,
