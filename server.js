@@ -1,5 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const TaskRoute = require("./src/routes/taskRoute")
 const connectDB = require("./src/config/connectDB");
 const authRoute = require("./src/routes/authRoute");
@@ -7,6 +9,8 @@ const projectRoute = require("./src/routes/projectRoute");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+app.use(cors());
+app.use(cookieParser);
 app.use(express.json());
 connectDB();
 app.get("/",(req,res)=>{
