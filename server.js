@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 app.use(cors());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(express.json());
 connectDB();
 app.get("/",(req,res)=>{
