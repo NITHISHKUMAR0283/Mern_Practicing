@@ -1,8 +1,22 @@
-import  {useState} from 'react';
+import  {useState,useEffect} from 'react';
 function App() {
   const [ name,setname]=useState("");
   const [ count , setCount]=useState(0);
-
+  useEffect(()=>{
+    console.log("page reloaded successfully");
+  },[])
+  
+  useEffect(()=>{
+    const timer = setInterval(()=>{
+    console.log("timer")
+  },1000);
+    return ()=>clearInterval(timer);
+    
+  },[])
+  useEffect(()=>{
+        document.title="Count"+count;
+      
+    },[count]);
   return (
     <div style={{
       textAlign:'center',marginTop:'50px'
@@ -27,7 +41,9 @@ function App() {
         }
         value = {count}>-1</button>
       <p>{count}</p>
+      
     </div>
+    
   );
 }
 export default App;
