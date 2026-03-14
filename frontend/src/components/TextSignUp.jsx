@@ -7,24 +7,32 @@ function SignUp(){
         password:""
     });
     function handlechange(e){
+        
+        
         const {name,value} = e.target;
+        const currentForm = {...form,[name]:value};
         setform({
             ...form,
             [name] :value
         });
+         let err = validate(currentForm);
+        console.log(err);
+        seterror(err);
+    
+    
     }
     const [error,seterror]=useState({});
-    function validate(){
+    function validate(currentForm){
         let errors ={};
         const PasswordPattern = /^(?=.*[A-Z])(?=(?:.*\d){4,}).{8,}$/
         const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if(form.name.trim()===""){
+        if(currentForm.name.trim()===""){
             errors.name ="Please enter the name";
         }
-        if(!EmailPattern.test(form.email)){
+        if(!EmailPattern.test(currentForm.email)){
             errors.email = "please enter valid email";
         }
-        if(!PasswordPattern.test(form.password)){
+        if(!PasswordPattern.test(currentForm.password)){
             errors.password = "Enter a strong password Minimum 8 Characters,1 Upper Case, 4 digits";
         }
         return errors;
@@ -32,14 +40,14 @@ function SignUp(){
 
     function handleSubmit(e){
         e.preventDefault();
-        let err = validate();
+        let err = validate(form);
         console.log(err);
         if(Object.keys(err).length>0){
             seterror(err);
         }
         else{
             alert("Form submitted successfully");
-            seterror({name:"",password:"",email:""});
+            seterror({});
         }
 
     }
