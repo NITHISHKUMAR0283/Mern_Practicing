@@ -16,14 +16,16 @@ function SignUp(){
     const [error,seterror]=useState({});
     function validate(){
         let errors ={};
+        const PasswordPattern = /^(?=.*[A-Z])(?=(?:.*\d){4,}).{8,}$/
+        const EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if(form.name.trim()===""){
             errors.name ="Please enter the name";
         }
-        if(form.email.trim()===""){
+        if(!EmailPattern.test(form.email)){
             errors.email = "please enter valid email";
         }
-        if(form.password.length<8){
-            errors.password = "please enter valid password";
+        if(!PasswordPattern.test(form.password)){
+            errors.password = "Enter a strong password Minimum 8 Characters,1 Upper Case, 4 digits";
         }
         return errors;
     }
@@ -31,11 +33,13 @@ function SignUp(){
     function handleSubmit(e){
         e.preventDefault();
         let err = validate();
+        console.log(err);
         if(Object.keys(err).length>0){
             seterror(err);
         }
         else{
             alert("Form submitted successfully");
+            seterror({name:"",password:"",email:""});
         }
 
     }
