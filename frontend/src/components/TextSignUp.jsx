@@ -1,6 +1,7 @@
 import {useState} from "react";
-
-function SignUp(){
+import { useNavigate } from "react-router-dom";
+function SignUp({setlogin}){
+    const navigate = useNavigate();
     const [ form , setform]=useState({
         name:"",
         email:"",
@@ -41,8 +42,10 @@ function SignUp(){
             seterror(err);
         }
         else{
-            alert("Form submitted successfully");
+            setlogin(true);
             seterror({});
+            navigate('/protected');
+            
         }}
     return(
         <div>
