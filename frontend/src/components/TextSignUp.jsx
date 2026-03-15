@@ -6,9 +6,7 @@ function SignUp(){
         email:"",
         password:""
     });
-    function handlechange(e){
-        
-        
+    function handlechange(e){       
         const {name,value} = e.target;
         const currentForm = {...form,[name]:value};
         setform({
@@ -17,10 +15,7 @@ function SignUp(){
         });
          let err = validate(currentForm);
         console.log(err);
-        seterror(err);
-    
-    
-    }
+        seterror(err);}
     const [error,seterror]=useState({});
     function validate(currentForm){
         let errors ={};
@@ -48,9 +43,7 @@ function SignUp(){
         else{
             alert("Form submitted successfully");
             seterror({});
-        }
-
-    }
+        }}
     return(
         <div>
             <form onSubmit={handleSubmit}>
