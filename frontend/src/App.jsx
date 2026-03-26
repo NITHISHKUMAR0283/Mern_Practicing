@@ -12,7 +12,7 @@ function App() {
       
       <Route path='/project/:id'element={<Project/>}/>
       <Route path='/protected' element ={<Protected_route isLoggedIn={isLogged}><Home/></Protected_route>}/>
-      <Route path = '/login' element={<TextSignUp setlogin = {setLogged}/>}/>
+      <Route path ='/' element={<TextSignUp setlogin = {setLogged}/>}/>
     </Routes>
       
     </div>

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom"; 
+import getData from '../services/fetchdata';
+import {useEffect,useState} from 'react'
 function Home(){
-    
-    const  project = [
-    { id: 1, name: "React Website" },
-    { id: 2, name: "Machine Learning App" }]
+    const [project,setproject] = useState([]);
+    useEffect(()=>{
+        getData().then(data=>setproject(data));
+    },[])
+    console.log(project);
     return(
         <div>
             <p>This is home Page</p>
@@ -13,7 +16,7 @@ function Home(){
             {project.map((p)=>{
                 return(
                 <li key={p.id}>
-                    <Link to={`/project/${p.id}`}>{`${p.name}`}</Link>
+                    <Link to={`/project/${p.id}`}>{`${p.title}`}</Link>
                 </li>)
             })}</ul>
         </div>

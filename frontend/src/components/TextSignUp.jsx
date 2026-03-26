@@ -31,9 +31,7 @@ function SignUp({setlogin}){
         if(!PasswordPattern.test(currentForm.password)){
             errors.password = "Enter a strong password Minimum 8 Characters,1 Upper Case, 4 digits";
         }
-        return errors;
-    }
-
+        return errors;    }
     function handleSubmit(e){
         e.preventDefault();
         let err = validate(form);
@@ -44,8 +42,7 @@ function SignUp({setlogin}){
         else{
             setlogin(true);
             seterror({});
-            navigate('/protected');
-            
+            navigate('/protected');            
         }}
     return(
         <div>
@@ -60,6 +57,5 @@ function SignUp({setlogin}){
             <button type="submit">Submit</button>
         </form>
         </div>
-    )
-}
+    )}
 export default SignUp;
