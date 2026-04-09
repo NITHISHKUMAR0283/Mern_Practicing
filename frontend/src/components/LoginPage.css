@@ -1,0 +1,64 @@
+#loginPage{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    background-color: rgb(232, 206, 206);
+    
+}
+#LoginCard>h1{
+    font-size: 5vh;
+}
+#LoginCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    min-height: 300px;
+    margin: auto auto;
+    width: 80vw;
+    height: 60vh;
+
+
+}
+#LoginForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 50px;
+    background-color: rgb(77, 53, 60);
+    color: rgb(255, 255, 255);
+    
+}
+#LoginForm > li{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 3vh;
+    width: 90%;
+    
+}
+#LoginForm>li>*{
+    margin: 5px;
+}
+#LoginForm>button{
+    margin: 20px 0px;
+    background-color: antiquewhite;
+    border: 2px solid rgb(5, 19, 5);
+    border-radius: 50px;
+    font-size: 3vh;
+    padding: 7px;
+}
+#LoginForm>Li>input{
+    height: 5vh;
+    border: none;
+    border-radius: 50px;
+    padding-left:10px;
+    padding-right: 10px;
+    font-size: medium;
+    background-color: antiquewhite;
+
+}
