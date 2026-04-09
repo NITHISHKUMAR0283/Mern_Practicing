@@ -32,17 +32,29 @@ function SignUp({setlogin}){
             errors.password = "Enter a strong password Minimum 8 Characters,1 Upper Case, 4 digits";
         }
         return errors;    }
-    function handleSubmit(e){
+    function handleSubmit(e){ 
         e.preventDefault();
         let err = validate(form);
         console.log(err);
         if(Object.keys(err).length>0){
             seterror(err);
-        }
+        } 
         else{
-            setlogin(true);
+            
+            const response= fetch("/api/auth/signup",{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    email:form.email,
+                    password:form.password})
+                
+            });
+            const data = response.json();
+            localStorage.setItem("token",data.token);
             seterror({});
-            navigate('/protected');            
+            navigate('/login');            
         }}
     return(
         <div>

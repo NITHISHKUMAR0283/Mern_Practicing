@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"; 
-import getData from '../services/fetchdata';
+import api from '../services/fetchdata';
 import {useEffect,useState} from 'react'
 function Home(){
+    api.putData();
     const [project,setproject] = useState([]);
     useEffect(()=>{
-        getData().then(data=>setproject(data));
+        api.getData().then(data=>setproject(data));
     },[])
     console.log(project);
     return(
