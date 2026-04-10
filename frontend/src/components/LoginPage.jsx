@@ -1,27 +1,44 @@
 import './LoginPage.css'
+import { useState } from 'react';
+import signin from '../services/authentication'
+import {useNavigate} from 'react-router-dom'
 function loginPage(){
-    const handleSubmit = (event)=>{
+    const navigate = useNavigate();
+    const [form,setForm] =useState({name:"",email:"",password:""});
+    const handleChange = (event)=>{
         event.preventDefault();
-        console.log("Called the submit function by on submit")
+        const ele = event.target.name;
+        setForm({...form,[ele]:event.target.value})
+    }
+    const handleSubmit = async (event)=>{
+        event.preventDefault();       
+        if(!await signin(form)){
+            navigate("/");
+
+        }
+        else{
+        navigate('/');}
+
+
     }
     return(
         <div id="loginPage">
             <div id="LoginCard">
             
-            <form action="Submit" onSubmit={handleSubmit}  id='LoginForm'>
-                <h1>Login</h1>
+            <form action="Submit" onChange={handleChange} onSubmit={handleSubmit}  id='LoginForm'>
+                <h1>Sign in</h1>
                 <li>
                     <label htmlFor="Name">Name</label>
-                    <input type="text" className="Name" />
+                    <input type="text" name='name' className="Name" />
                 </li>
                 
                 <li>
                     <label htmlFor="email">Email</label>
-                    <input type="text" className="Email" />
+                    <input type="text" name='email' className="Email" />
                 </li>
                 <li>
                     <label htmlFor="Password">Password</label>
-                    <input type="text" className="Password" />
+                    <input type="text" name='password' className="Password" />
                 </li>
                 <button type='Submit'>Submit</button>
             </form>

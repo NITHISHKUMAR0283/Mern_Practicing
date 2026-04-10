@@ -31,18 +31,23 @@
     border-radius: 50px;
     background-color: rgb(77, 53, 60);
     color: rgb(255, 255, 255);
-    
+    font-family: 'Courier New', Courier, monospace;
+
 }
 #LoginForm > li{
     list-style: none;
     display: flex;
     flex-direction: column;
+    align-items: center;
     font-size: 3vh;
     width: 90%;
     
 }
 #LoginForm>li>*{
     margin: 5px;
+    width: 80%;
+    font-family: 'Courier New', Courier, monospace;
+
 }
 #LoginForm>button{
     margin: 20px 0px;
@@ -51,6 +56,7 @@
     border-radius: 50px;
     font-size: 3vh;
     padding: 7px;
+    font-family: 'Courier New', Courier, monospace;
 }
 #LoginForm>Li>input{
     height: 5vh;
