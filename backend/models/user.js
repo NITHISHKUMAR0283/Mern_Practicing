@@ -14,6 +14,11 @@ const UserSchema = await mongoose.Schema({
         type:String,
         required:true,
         select:false
+    },
+    role:{
+        type:String,
+        enum:["admin","user"],
+        default:"user"
     }
 })
 export default  mongoose.model("USER",UserSchema);

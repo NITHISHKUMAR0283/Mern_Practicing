@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-const generate_token = async (user_id)=>{
+const generate_token = async (user_id,role)=>{
     try{
-    const token = jwt.sign({id:user_id},process.env.JWT_SECRET,{expiresIn:"1d"});
+    const token = jwt.sign({id:user_id,role:role},process.env.JWT_SECRET,{expiresIn:"1d"});
     
     return token;  }
     catch(err){

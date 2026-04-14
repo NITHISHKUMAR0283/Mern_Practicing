@@ -3,6 +3,7 @@ import connectDb from "../backend/config/connectDb.js";
 import dotenv from 'dotenv';
 import authRoute from "./routes/authRoutes.js"
 import cors from 'cors';
+import productRouter from './routes/productRoutes.js'
 dotenv.config();
 
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 const port = process.env.PORT;
 app.use("/api/auth",authRoute);
+app.use("/api/product",productRouter);
 app.listen(port||5000,()=>{
     console.log(`Listening backend api on ${port||5000}`)
 })

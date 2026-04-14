@@ -9,7 +9,6 @@ async function signin (Form){
     
     const data = await response.json();
     if (!data || !data.token){
-        console.log("not found response");
         return false;
     }
     const Token =  data.token;
