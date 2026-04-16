@@ -1,9 +1,14 @@
 import './LoginPage.css'
 import { useState } from 'react';
-import signin from '../services/authentication'
+import {login,signin} from '../services/authentication'
 import {useNavigate} from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+
 function loginPage(){
     const navigate = useNavigate();
+    const params= useParams();
+    let pagename = params.pagename;
+    pagename="login";
     const [form,setForm] =useState({name:"",email:"",password:""});
     const handleChange = (event)=>{
         event.preventDefault();
@@ -12,10 +17,11 @@ function loginPage(){
     }
     const handleSubmit = async (event)=>{
         event.preventDefault();       
-        if(!await signin(form)){
+        if(pagename=="signin" && !await signin(form)|| pagename=="login" && !await login(form)){
             navigate("/");
 
         }
+
         else{
         navigate('/');}
 
@@ -26,11 +32,12 @@ function loginPage(){
             <div id="LoginCard">
             
             <form action="Submit" onChange={handleChange} onSubmit={handleSubmit}  id='LoginForm'>
-                <h1>Sign in</h1>
-                <li>
+                {pagename=="signin" && <h1> Sign in </h1>}
+                {pagename=="login" &&<h1>login</h1>}
+                {pagename!="login" && <li>
                     <label htmlFor="Name">Name</label>
                     <input type="text" name='name' className="Name" />
-                </li>
+                </li>}
                 
                 <li>
                     <label htmlFor="email">Email</label>
