@@ -27,7 +27,6 @@ export async function login (Form){
             return false;
         }
         localStorage.setItem("token",data.token);
-        console.log(data);
         return true;
 
 

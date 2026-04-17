@@ -15,7 +15,7 @@ export const createProduct = async (req,res)=>{
     catch(err){
         res.status(200).json({
             success:false,
-            message:`Error creating product ${err}`
+            message:`Error creating product ${err.message}`
         })
     }
 }
@@ -37,7 +37,7 @@ export const getProduct = async (req,res)=>{
     catch(err){
         res.status(400).json({
                 success: false,
-                message:`cant fetch the product ${err}`
+                message:`cant fetch the product ${err.message}`
             });
     }
 }

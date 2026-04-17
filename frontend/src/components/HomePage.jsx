@@ -13,7 +13,7 @@ function HomePage(){
         {!token && <button >Login</button>}</Link>
         <Link to={'/login/signin'} >
         {!token && <button>Sign in</button>}</Link>
-        
+        <ProductCard/>
         </div>
 
     )
