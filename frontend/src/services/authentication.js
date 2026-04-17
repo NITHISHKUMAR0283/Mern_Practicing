@@ -20,18 +20,19 @@ export async function login (Form){
             headers:{
                 "Content-Type":"application/json"
             },
-            body:json.stringify(Form)
+            body:JSON.stringify(Form)
         })
         const data =await response.json();
         if(!data || !data.token){
             return false;
         }
         localStorage.setItem("token",data.token);
+        console.log(data);
         return true;
 
 
     }
     catch(err){
-        console.log(` error happened when logginin ${err}`)
+        console.log(` error happened when logginin ${err.message}`)
     }
 }

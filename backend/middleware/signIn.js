@@ -3,10 +3,11 @@ import USER from '../models/user.js';
 
 const SignUp =async (req,res)=>{
     try{
+        console.log(req.body);
         
         const newuser =await USER.create({...req.body});
     if(!newuser){
-        res.status(400).json({
+        return res.status(400).json({
             success:false,
             message:"Cant able to create the user backend problem is there"
         })
@@ -20,7 +21,7 @@ const SignUp =async (req,res)=>{
     res.status(400).json({
         success:false,
         message:"Error while creating the user in the db",
-        error:err
+        error: err.message || err.toString()
     })
 }
 }

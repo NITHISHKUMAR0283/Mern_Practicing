@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bycrypt from "bcryptjs"
-const UserSchema = await mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
@@ -22,7 +22,7 @@ const UserSchema = await mongoose.Schema({
     }
 });
 UserSchema.pre("save",async function(next){
-    if(!this.isModified(password))return next();
+    if(!this.isModified("password"))return ;
     else{
         const salt = await bycrypt.genSalt(10);
         this.password = await bycrypt.hash(this.password,salt);
