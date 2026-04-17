@@ -1,4 +1,4 @@
-async function signin (Form){
+export async function signin (Form){
     const response = await fetch("http://localhost:8000/api/auth/signin",{
         method:"POST" ,
         headers:{
@@ -13,7 +13,7 @@ async function signin (Form){
     }
     return true;
 }
-async function login (Form){
+export async function login (Form){
     try{
         const response = await fetch("http://localhost:8000/api/auth/login",{
             method:"POST",
@@ -35,4 +35,3 @@ async function login (Form){
         console.log(` error happened when logginin ${err}`)
     }
 }
-export default {login,signin};

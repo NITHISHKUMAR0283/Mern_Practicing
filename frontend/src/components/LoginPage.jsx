@@ -7,8 +7,9 @@ import { useParams } from 'react-router-dom';
 function loginPage(){
     const navigate = useNavigate();
     const params= useParams();
+    console.log(params);
     let pagename = params.pagename;
-    pagename="login";
+    
     const [form,setForm] =useState({name:"",email:"",password:""});
     const handleChange = (event)=>{
         event.preventDefault();
